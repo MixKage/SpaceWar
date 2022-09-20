@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class InputManager : MonoBehaviour
     #endregion
     [SerializeField] private Player _pl;
     private Vector3 movementVector = new Vector3();
+    [SerializeField] private TMP_InputField _inputField;
     private void Awake()
     {
         _instance = this;
@@ -40,5 +43,9 @@ public class InputManager : MonoBehaviour
     public void SpawnPlayer()
     {
         PlayerManager.Instance.SpawnPlayer();
+    }
+    public void SendName(string name)
+    {
+        PlayerManager.Instance.SetPlayerName(_inputField.text);
     }
 }

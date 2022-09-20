@@ -17,8 +17,16 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
-    //Буфер
-    private string _playerName;
+    //Буфер между клиентом и сервером
+    [SerializeField] private string _playerName;
+
+    public string PLayerName
+    {
+        get
+        {
+            return _playerName;
+        }
+    }
 
     [SerializeField] private NetworkManager _netManager;
 
@@ -34,12 +42,13 @@ public class PlayerManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
+        //Проверка на клиенте не самая крутая идея, но пока так
         if (string.IsNullOrWhiteSpace(_playerName))
         {
             Debug.Log("No name has been set");
             return;
         }
-        
+
         // if (!_netManager.clientLoadedScene)
         // {
         if (!NetworkClient.ready)
@@ -49,5 +58,7 @@ public class PlayerManager : MonoBehaviour
             NetworkClient.AddPlayer();
         // }
         UIManager.Instance.SpawnGroupToogle();
+        UIManager.Instance.PLayerStatsGroupToogle();
+        UIManager.Instance.SetUIPlayerName(_playerName);
     }
 }

@@ -12,4 +12,10 @@ public class CustomNetworkManager : NetworkManager
         Debug.Log("Connected");
         UIManager.Instance.SpawnGroupToogle();
     }
+
+    public override void OnClientDisconnect()
+    {
+        UIManager.Instance.PLayerStatsGroupToogle();
+        base.OnClientDisconnect();
+    }
 }
