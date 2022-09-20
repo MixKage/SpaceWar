@@ -2,48 +2,41 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
-    public float speed;
-    public float offset;
+    [SyncVar][SerializeField] private float speed;
+    private Rigidbody _rb;
+    private readonly float SPEED = 1;
 
-    private Rigidbody rb;
-
-    private Vector3 moveInput;
-
-    private Vector3 moveVelocity;
-    private Camera _camera;
-
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        _camera = Camera.main;
+        _rb = this.GetComponent<Rigidbody>();
+        if (isClient && isLocalPlayer)
+        {
+            SetInputManagerPlayer();
+        }
+        if (isServer)
+        {
+            //Синхронизирую значения с клиентами с помощью SyncVar
+            speed = SPEED;
+        }
     }
 
-
-    void Update()
+    private void SetInputManagerPlayer()
     {
-        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        moveVelocity = moveInput.normalized * speed;
-
-        Vector3 screenMousePosition = Input.mousePosition;
-        Debug.Log(Mathf.Atan2(screenMousePosition.y, screenMousePosition.x));
-        transform.rotation = Quaternion.Euler(0f, Mathf.Atan2(screenMousePosition.y, screenMousePosition.x) * 100 * -1, 0f);
-        //Debug.Log(screenMousePosition.x + " " + screenMousePosition.y + " " + screenMousePosition.z);
-        //Vector3 worldMousePosition = _camera.ScreenToWorldPoint(screenMousePosition);
-        //Debug.Log(worldMousePosition.x + " " + worldMousePosition.y + " " + worldMousePosition.z);
-
-        //transform.rotation = new Vector3(0f,0f,0f);
-
-        //
-        // Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        // Debug.Log(difference.x+" "+difference.y + " "+difference.z);
-        // float rotz = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        // transform.rotation = Quaternion.Euler(0f, rotz + offset, 0f);
+        InputManager.Instance.SetPlayer(this);
     }
-    private void FixedUpdate()
+    //Функция для сервера
+    [Command]
+    public void CmdMovePlayer(Vector3 _movementVector)
     {
-        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        _rb.AddForce(_movementVector.normalized * speed);
+    }
+    //Функция для клиента
+    public void MovePlayer(Vector3 _movementVector)
+    {
+        _rb.AddForce(_movementVector.normalized * speed);
     }
 }
