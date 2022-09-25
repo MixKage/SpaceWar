@@ -12,6 +12,8 @@ public class Player : NetworkBehaviour
     [SyncVar][SerializeField] private float _speed;
     [SyncVar][SerializeField] private string _playerName;
     [SerializeField] private TextMeshProUGUI _playerNameText;
+    Camera PlayerCamera;
+    private float cameraHeight = 30;
     private Rigidbody _rb;
     private readonly float SPEED = 1;
 
@@ -21,6 +23,7 @@ public class Player : NetworkBehaviour
         if (isClient && isLocalPlayer)
         {
             SetInputManagerPlayer();
+            PlayerCamera = Camera.main;
         }
         if (isServer)
         {
@@ -30,16 +33,23 @@ public class Player : NetworkBehaviour
         }
     }
 
+    public void CameraUpdate()
+    {
+        PlayerCamera.transform.position = this.transform.position + new Vector3(0, cameraHeight, 0);
+    }
+
     private void SetInputManagerPlayer()
     {
         InputManager.Instance.SetPlayer(this);
     }
+
     //Функция для сервера
     [Command]
     public void CmdMovePlayer(Vector3 _movementVector)
     {
         _rb.AddForce(_movementVector.normalized * _speed);
     }
+
     //Функция для клиента
     public void MovePlayer(Vector3 _movementVector)
     {

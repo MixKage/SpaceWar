@@ -14,20 +14,27 @@ public class InputManager : MonoBehaviour
     {
         get { return _instance; }
     }
-    #endregion
-    [SerializeField] private Player _pl;
-    private Vector3 movementVector = new Vector3();
-    [SerializeField] private TMP_InputField _inputField;
+
     private void Awake()
     {
         _instance = this;
     }
+    #endregion
+
+    [SerializeField] private Player _pl;
+    private Vector3 movementVector = new Vector3();
+
+    [SerializeField] private TMP_InputField _inputField;
 
     private void Update()
     {
         if (_pl)
+        {
             MoveInput();
+            _pl.CameraUpdate();
+        }
     }
+
     public void SetPlayer(Player _pl)
     {
         this._pl = _pl;
@@ -38,7 +45,7 @@ public class InputManager : MonoBehaviour
         movementVector.z = Input.GetAxis("Vertical");
 
         _pl.CmdMovePlayer(movementVector);
-        _pl.MovePlayer(movementVector);
+        //_pl.MovePlayer(movementVector);
     }
     public void SpawnPlayer()
     {
@@ -46,6 +53,6 @@ public class InputManager : MonoBehaviour
     }
     public void SendName(string name)
     {
-        PlayerManager.Instance.SetPlayerName(_inputField.text);
+        PlayerManager.Instance.PLayerName = _inputField.text;
     }
 }

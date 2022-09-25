@@ -15,6 +15,11 @@ public class PlayerManager : MonoBehaviour
     {
         get { return _instance; }
     }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
     #endregion
 
     //Буфер между клиентом и сервером
@@ -26,19 +31,14 @@ public class PlayerManager : MonoBehaviour
         {
             return _playerName;
         }
+
+        set
+        {
+            _playerName = value;
+        }
     }
 
     [SerializeField] private NetworkManager _netManager;
-
-    public void Awake()
-    {
-        _instance = this;
-    }
-
-    public void SetPlayerName(string _name)
-    {
-        _playerName = _name;
-    }
 
     public void SpawnPlayer()
     {
