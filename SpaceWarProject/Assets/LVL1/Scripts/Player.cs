@@ -9,9 +9,11 @@ using UnityEngine.Serialization;
 public class Player : NetworkBehaviour
 {
     //SyncVar переменная зависит от сервера
-    [SyncVar][SerializeField] private float _speed;
-    [SyncVar][SerializeField] private string _playerName;
+    [SyncVar] [SerializeField] private float _speed;
+    [SyncVar] [SerializeField] private string _playerName;
     [SerializeField] private TextMeshProUGUI _playerNameText;
+    [SerializeField] private GameObject _missile;
+    [SerializeField] private Transform _shotPoint;
     Camera PlayerCamera;
     private float cameraHeight = 30;
     private Rigidbody _rb;
@@ -25,6 +27,7 @@ public class Player : NetworkBehaviour
             SetInputManagerPlayer();
             PlayerCamera = Camera.main;
         }
+
         if (isServer)
         {
             //Синхронизирую значения с клиентами с помощью SyncVar
@@ -43,11 +46,29 @@ public class Player : NetworkBehaviour
         InputManager.Instance.SetPlayer(this);
     }
 
-    //Функция для сервера
+    //Функция для сервера движение
     [Command]
     public void CmdMovePlayer(Vector3 _movementVector)
     {
         _rb.AddForce(_movementVector.normalized * _speed);
+    }
+
+    //Функция для сервера стрельба
+    [Command]
+    public void CmdShootPlayer()
+    {
+        Instantiate(_missile, _shotPoint.position, transform.rotation);
+    }
+    
+    [ClientRpc]
+    public void RpcShootPlayer()
+    {
+        Instantiate(_missile, _shotPoint.position, transform.rotation);
+    }
+
+    public void ShootPlayer()
+    {
+        Instantiate(_missile, _shotPoint.position, transform.rotation);
     }
 
     //Функция для клиента
@@ -62,7 +83,7 @@ public class Player : NetworkBehaviour
         _playerName = _plName;
         RpcSetVisibleName(_playerName);
     }
-    
+
     //Срабатывает для всех клинтов
     [ClientRpc]
     public void RpcSetVisibleName(string _plName)
