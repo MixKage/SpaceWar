@@ -56,14 +56,16 @@ public class InputManager : NetworkBehaviour
             {
                 if (isServer)
                 {
+                    //_pl.ShootPlayer(netId);
                     _pl.RpcShootPlayer();
+
                     Debug.Log("1134SERVER");
                 }
                 else
                 {
                     //TODO: Не стреляет у других клиентов
+                    //_pl.CmdShootPlayer(netId); 
                     _pl.CmdShootPlayer(); 
-                    //_pl.RpcShootPlayer();
                     Debug.Log("1134CLIENT");
                     _pl.ShootPlayer();
                 }
@@ -77,7 +79,11 @@ public class InputManager : NetworkBehaviour
         }
 
         _pl.CmdMovePlayer(movementVector);
-        //_pl.MovePlayer(movementVector);
+
+        Ray ray = _pl.PlayerCamera.ScreenPointToRay(Input.mousePosition);
+        float midPoint = (transform.position - _pl.PlayerCamera.transform.position).magnitude;
+        Vector3 wCords = ray.origin + ray.direction * midPoint;
+        _pl.LookAtMouse(wCords);
     }
     public void SpawnPlayer()
     {

@@ -14,7 +14,7 @@ public class Player : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI _playerNameText;
     [SerializeField] private GameObject _missile;
     [SerializeField] private Transform _shotPoint;
-    Camera PlayerCamera;
+    public Camera PlayerCamera;
     private float cameraHeight = 30;
     private Rigidbody _rb;
     private readonly float SPEED = 1;
@@ -46,20 +46,40 @@ public class Player : NetworkBehaviour
         InputManager.Instance.SetPlayer(this);
     }
 
+    [Command]
+    public void LookAtMouse(Vector3 cords)
+    {
+        transform.LookAt(cords);
+        transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
+    }
+
     //Функция для сервера движение
     [Command]
     public void CmdMovePlayer(Vector3 _movementVector)
     {
-        _rb.AddForce(_movementVector.normalized * _speed);
+        _rb.AddRelativeForce(_movementVector.normalized * _speed);
     }
 
+    //[Server]
+    //public void ShootPlayer(uint owner)
+    //{
+    //    GameObject missle = Instantiate(_missile, _shotPoint.position, transform.rotation);
+    //    NetworkServer.Spawn(missle);
+    //    missle.GetComponent<Missile>().Init(owner);
+    //}
+
+    //[Command]
+    //public void CmdShootPlayer(uint owner)
+    //{
+    //    ShootPlayer(owner);
+    //}
     //Функция для сервера стрельба
     [Command]
     public void CmdShootPlayer()
     {
         Instantiate(_missile, _shotPoint.position, transform.rotation);
     }
-    
+
     [ClientRpc]
     public void RpcShootPlayer()
     {
@@ -69,12 +89,6 @@ public class Player : NetworkBehaviour
     public void ShootPlayer()
     {
         Instantiate(_missile, _shotPoint.position, transform.rotation);
-    }
-
-    //Функция для клиента
-    public void MovePlayer(Vector3 _movementVector)
-    {
-        _rb.AddForce(_movementVector.normalized * _speed);
     }
 
     [Command]
