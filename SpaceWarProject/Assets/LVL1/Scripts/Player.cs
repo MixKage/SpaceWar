@@ -60,36 +60,16 @@ public class Player : NetworkBehaviour
         _rb.AddRelativeForce(_movementVector.normalized * _speed);
     }
 
-    //[Server]
-    //public void ShootPlayer(uint owner)
-    //{
-    //    GameObject missle = Instantiate(_missile, _shotPoint.position, transform.rotation);
-    //    NetworkServer.Spawn(missle);
-    //    missle.GetComponent<Missile>().Init(owner);
-    //}
-
-    //[Command]
-    //public void CmdShootPlayer(uint owner)
-    //{
-    //    ShootPlayer(owner);
-    //}
-    //Функция для сервера стрельба
+    // Функция для сервера стрельба
     [Command]
-    public void CmdShootPlayer()
+    public void CmdShootPlayer(uint owner)
     {
-        Instantiate(_missile, _shotPoint.position, transform.rotation);
+        Debug.Log("Fire");
+        GameObject missle = Instantiate(_missile, _shotPoint.position, transform.rotation);
+        NetworkServer.Spawn(missle);
+        missle.GetComponent<Missile>().Init(owner);
     }
-
-    [ClientRpc]
-    public void RpcShootPlayer()
-    {
-        Instantiate(_missile, _shotPoint.position, transform.rotation);
-    }
-
-    public void ShootPlayer()
-    {
-        Instantiate(_missile, _shotPoint.position, transform.rotation);
-    }
+   
 
     [Command]
     public void CmdSetPlayerName(string _plName)

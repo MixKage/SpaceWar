@@ -8,7 +8,7 @@ public class CustomNetworkManager : NetworkManager
 {
     public override void OnClientConnect()
     {
-        // base.OnClientConnect(conn);
+        //base.OnClientConnect();
         Debug.Log("Connected");
         UIManager.Instance.SpawnGroupToogle();
     }

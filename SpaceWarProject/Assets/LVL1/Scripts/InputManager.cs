@@ -27,12 +27,15 @@ public class InputManager : NetworkBehaviour
     private Vector3 movementVector = new Vector3();
 
     [SerializeField] private TMP_InputField _inputField;
-    
+
     private float timeBtwShots;
     [SerializeField] private float startTimeBtwShots;
 
     private void Update()
     {
+
+        if (isLocalPlayer) Debug.Log("ImHere");
+
         if (_pl)
         {
             MoveInput();
@@ -54,21 +57,8 @@ public class InputManager : NetworkBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (isServer)
-                {
-                    //_pl.ShootPlayer(netId);
-                    _pl.RpcShootPlayer();
-
-                    Debug.Log("1134SERVER");
-                }
-                else
-                {
-                    //TODO: Не стреляет у других клиентов
-                    //_pl.CmdShootPlayer(netId); 
-                    _pl.CmdShootPlayer(); 
-                    Debug.Log("1134CLIENT");
-                    _pl.ShootPlayer();
-                }
+                Debug.Log("Piwe");
+                _pl.CmdShootPlayer(netId);
 
                 timeBtwShots = startTimeBtwShots;
             }
