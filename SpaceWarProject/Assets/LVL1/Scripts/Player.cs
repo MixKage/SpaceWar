@@ -14,10 +14,11 @@ public class Player : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI _playerNameText;
     [SerializeField] private GameObject _missile;
     [SerializeField] private Transform _shotPoint;
+    [SyncVar] public int HitPoints = 100;
     public Camera PlayerCamera;
     private float cameraHeight = 30;
     private Rigidbody _rb;
-    private readonly float SPEED = 1;
+    private readonly float SPEED = 20;
 
     private void Start()
     {
@@ -69,7 +70,17 @@ public class Player : NetworkBehaviour
         NetworkServer.Spawn(missle);
         missle.GetComponent<Missile>().Init(owner);
     }
-   
+
+    [ServerCallback]
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Missile>() != null)
+        {
+            HitPoints -= 20;
+            if (HitPoints == 0)
+                NetworkServer.Destroy(gameObject);
+        }
+    }
 
     [Command]
     public void CmdSetPlayerName(string _plName)
