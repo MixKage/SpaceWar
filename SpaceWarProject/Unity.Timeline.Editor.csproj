@@ -167,9 +167,9 @@
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Utilities/AnimatedParameterCache.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Utilities/FileUtility.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/State/WindowState.cs" />
+     <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Utilities/Scopes/GUIColorOverride.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/treeview/ItemGui/TimelineClipGUI.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/inspectors/DirectorNamedColorInspector.cs" />
-     <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Utilities/Scopes/GUIColorOverride.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/inspectors/AnimationPlayableAssetInspector.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Actions/TrackAction.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Utilities/Range.cs" />
@@ -246,8 +246,8 @@
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Activation/ActivationTrackInspector.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Manipulators/Utils/ManipulatorsUtils.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Extensions/AnimationTrackExtensions.cs" />
-     <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Window/WindowConstants.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Manipulators/EditMode.cs" />
+     <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Window/WindowConstants.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/treeview/Snapping/ISnappable.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/treeview/TimelineDataSource.cs" />
      <Compile Include="Library/PackageCache/com.unity.timeline@1.7.1/Editor/Animation/AnimationOffsetMenu.cs" />
@@ -573,14 +573,23 @@
      <Reference Include="UnityEditor.OSXStandalone.Extensions">
      <HintPath>/Applications/Unity/Hub/Editor/2022.1.15f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
      </Reference>
+     <Reference Include="Mono.CecilX.Rocks">
+     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Plastic.Newtonsoft.Json">
      <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="Mono.CecilX.Pdb">
+     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Plastic.Antlr3.Runtime">
      <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.YamlDotNet">
      <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll</HintPath>
+     </Reference>
+     <Reference Include="Mono.CecilX">
+     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.TextureAssets">
      <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll</HintPath>
@@ -600,20 +609,11 @@
      <Reference Include="Newtonsoft.Json">
      <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll</HintPath>
      </Reference>
-     <Reference Include="unityplastic">
-     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
-     </Reference>
-     <Reference Include="Mono.CecilX.Rocks">
-     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
-     </Reference>
-     <Reference Include="Mono.CecilX.Pdb">
-     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
-     </Reference>
-     <Reference Include="Mono.CecilX">
-     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
-     </Reference>
      <Reference Include="Mono.CecilX.Mdb">
      <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+     </Reference>
+     <Reference Include="unityplastic">
+     <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
      </Reference>
      <Reference Include="nunit.framework">
      <HintPath>/Users/mixkage/files/github/SpaceWar/SpaceWarProject/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
