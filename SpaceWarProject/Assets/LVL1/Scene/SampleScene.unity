@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 0.333
       objectReference: {fileID: 0}
+    - target: {fileID: 1546546873624608251, guid: e2af618614b9844fea8050282c360967, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1546546873624608252, guid: e2af618614b9844fea8050282c360967, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
