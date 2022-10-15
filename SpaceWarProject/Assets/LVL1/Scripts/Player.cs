@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
+using UnityEngine.Animations;
 using UnityEngine.Serialization;
 
 public class Player : NetworkBehaviour
@@ -14,6 +15,7 @@ public class Player : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI _playerNameText;
     [SerializeField] private GameObject _missile;
     [SerializeField] private Transform _shotPoint;
+    [SerializeField] private GameObject _bodySpaceShip;
     [SyncVar] public int HitPoints = 100;
     public Camera PlayerCamera;
     private float cameraHeight = 30;
@@ -50,8 +52,10 @@ public class Player : NetworkBehaviour
     [Command]
     public void LookAtMouse(Vector3 cords)
     {
-        transform.LookAt(cords);
-        transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
+        // transform.LookAt(cords);
+        // transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
+        _bodySpaceShip.transform.LookAt(cords);
+        _bodySpaceShip.transform.rotation = Quaternion.Euler(new Vector3(0, _bodySpaceShip.transform.rotation.eulerAngles.y, 0));
     }
 
     //Функция для сервера движение
@@ -66,7 +70,7 @@ public class Player : NetworkBehaviour
     public void CmdShootPlayer(uint owner)
     {
         Debug.Log("Fire");
-        GameObject missle = Instantiate(_missile, _shotPoint.position, transform.rotation);
+        GameObject missle = Instantiate(_missile, _shotPoint.position, _bodySpaceShip.transform.rotation);
         NetworkServer.Spawn(missle);
         missle.GetComponent<Missile>().Init(owner);
     }
