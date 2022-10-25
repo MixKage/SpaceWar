@@ -12,15 +12,21 @@ public class Player : NetworkBehaviour
     //SyncVar переменная зависит от сервера
     [SyncVar] [SerializeField] private float _speed;
     [SyncVar] [SerializeField] private string _playerName;
+
     [SerializeField] private TextMeshProUGUI _playerNameText;
     [SerializeField] private GameObject _missile;
     [SerializeField] private Transform _shotPoint;
     [SerializeField] private GameObject _bodySpaceShip;
-    [SyncVar] public int HitPoints = 100;
+
+    [SyncVar] private int HitPoints = 100;
+    [SyncVar] private int MaxHitPoints = 100;
     public Camera PlayerCamera;
     private float cameraHeight = 30;
     private Rigidbody _rb;
     private readonly float SPEED = 20;
+
+    private float timeBtwShots;
+    [SerializeField] private float startTimeBtwShots;
 
     private void Start()
     {
@@ -39,6 +45,43 @@ public class Player : NetworkBehaviour
         }
     }
 
+    public void Update()
+    {
+        
+        if (isLocalPlayer)
+        {
+            Vector3 movementVector = new Vector3();
+            movementVector.x = Input.GetAxis("Horizontal");
+            movementVector.z = Input.GetAxis("Vertical");
+
+            //Стрельба с перезарядкой
+            if (timeBtwShots <= 0)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Debug.Log("Piwe");
+                    CmdShootPlayer(netId);
+
+                    timeBtwShots = startTimeBtwShots;
+                }
+            }
+            else
+            {
+                timeBtwShots -= Time.deltaTime;
+            }
+
+            MovePlayer(movementVector);
+
+            LookAtMouse();
+            CameraUpdate();
+        }
+    }
+
+    public float GetHpSliderValue()
+    {
+        return 1 - ((float)HitPoints / (float)MaxHitPoints);
+    }
+
     public void CameraUpdate()
     {
         PlayerCamera.transform.position = this.transform.position + new Vector3(0, cameraHeight, 0);
@@ -49,18 +92,19 @@ public class Player : NetworkBehaviour
         InputManager.Instance.SetPlayer(this);
     }
 
-    [Command]
-    public void LookAtMouse(Vector3 cords)
+    public void LookAtMouse()
     {
-        // transform.LookAt(cords);
-        // transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
-        _bodySpaceShip.transform.LookAt(cords);
-        _bodySpaceShip.transform.rotation = Quaternion.Euler(new Vector3(0, _bodySpaceShip.transform.rotation.eulerAngles.y, 0));
+        Ray ray = PlayerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            Vector3 lookRotation = new Vector3(hit.point.x, _bodySpaceShip.transform.position.y, hit.point.z);
+            _bodySpaceShip.transform.LookAt(lookRotation);
+        }
     }
 
-    //Функция для сервера движение
-    [Command]
-    public void CmdMovePlayer(Vector3 _movementVector)
+    //Функция движение
+    public void MovePlayer(Vector3 _movementVector)
     {
         _rb.AddRelativeForce(_movementVector.normalized * _speed);
     }

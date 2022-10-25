@@ -23,7 +23,7 @@ public class InputManager : NetworkBehaviour
     }
     #endregion
 
-    [SerializeField] private Player _pl;
+    [SerializeField] public Player _pl;
     private Vector3 movementVector = new Vector3();
 
     [SerializeField] private TMP_InputField _inputField;
@@ -31,54 +31,16 @@ public class InputManager : NetworkBehaviour
     private float timeBtwShots;
     [SerializeField] private float startTimeBtwShots;
 
-    private void Update()
-    {
-
-        if (isLocalPlayer) Debug.Log("ImHere");
-
-        if (_pl)
-        {
-            MoveInput();
-            _pl.CameraUpdate();
-        }
-    }
-
     public void SetPlayer(Player _pl)
     {
         this._pl = _pl;
     }
-    private void MoveInput()
-    {
-        movementVector.x = Input.GetAxis("Horizontal");
-        movementVector.z = Input.GetAxis("Vertical");
 
-        //Стрельба с перезарядкой
-        if (timeBtwShots <= 0)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("Piwe");
-                _pl.CmdShootPlayer(netId);
-
-                timeBtwShots = startTimeBtwShots;
-            }
-        }
-        else
-        {
-            timeBtwShots -= Time.deltaTime;
-        }
-
-        _pl.CmdMovePlayer(movementVector);
-
-        Ray ray = _pl.PlayerCamera.ScreenPointToRay(Input.mousePosition);
-        float midPoint = (transform.position - _pl.PlayerCamera.transform.position).magnitude;
-        Vector3 wCords = ray.origin + ray.direction * midPoint;
-        _pl.LookAtMouse(wCords);
-    }
     public void SpawnPlayer()
     {
         PlayerManager.Instance.SpawnPlayer();
     }
+
     public void SendName(string name)
     {
         PlayerManager.Instance.PLayerName = _inputField.text;
