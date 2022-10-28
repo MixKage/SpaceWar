@@ -3718,7 +3718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -3727,7 +3727,7 @@ PrefabInstance:
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: d1bd425e99d126543815a76782cbfe95, type: 3}
+      objectReference: {fileID: 1181338042}
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3742,7 +3742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_name
+      value: ReturnPlayerInGame
       objectReference: {fileID: 0}
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -3750,7 +3750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: StatsUpdater, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5534975430910773604, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
