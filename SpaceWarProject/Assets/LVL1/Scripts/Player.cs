@@ -49,13 +49,17 @@ public class Player : NetworkBehaviour
 
     public void Update()
     {
-        
+
         if (isLocalPlayer)
         {
             Vector3 movementVector = new Vector3();
             movementVector.x = Input.GetAxis("Horizontal");
             movementVector.z = Input.GetAxis("Vertical");
 
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _rb.velocity = new Vector3(0, 0, 0);
+            }
             //Стрельба с перезарядкой
             if (timeBtwShots <= 0)
             {
@@ -84,15 +88,23 @@ public class Player : NetworkBehaviour
         return 1 - ((float)HitPoints / (float)MaxHitPoints);
     }
 
+    [ClientRpc]
     public void SetActivePlayer(bool isActive)
     {
         gameObject.SetActive(isActive);
     }
+    [Command]
+    public void CmdSetActivePlayer(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+        SetActivePlayer(isActive);
+        if (isActive)
+            HitPoints = MaxHitPoints;
+    }
 
     public void ReturnPlayerInGame()
     {
-        gameObject.SetActive(true);
-        HitPoints = MaxHitPoints;
+        CmdSetActivePlayer(true);
     }
 
     public void CameraUpdate()
@@ -115,7 +127,6 @@ public class Player : NetworkBehaviour
             _bodySpaceShip.transform.LookAt(lookRotation);
         }
     }
-
     //Функция движение
     public void MovePlayer(Vector3 _movementVector)
     {
@@ -142,12 +153,14 @@ public class Player : NetworkBehaviour
             {
                 //NetworkServer.Destroy(gameObject);
                 //Вместо удаления корабля мы будем его отключать
+                //CmdSetActivePlayer(false);
+                gameObject.SetActive(false);
                 SetActivePlayer(false);
             }
         }
     }
 
-    [Command]
+
     public void CmdSetPlayerName(string _plName)
     {
         _playerName = _plName;
@@ -155,7 +168,7 @@ public class Player : NetworkBehaviour
     }
 
     //Срабатывает для всех клинтов
-    [ClientRpc]
+
     public void RpcSetVisibleName(string _plName)
     {
         _playerNameText.text = _plName;

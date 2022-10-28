@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpSlider: {fileID: 1366580207}
-  DyeInfoRespawn: {fileID: 5534975430659547325}
+  DeathScreen: {fileID: 5534975430659547325}
 --- !u!1 &1220885022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2995,11 +2995,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1830345096 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5534975431413004595, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
-  m_PrefabInstance: {fileID: 5534975430659547323}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1911165964
 GameObject:
   m_ObjectHideFlags: 0
@@ -3698,7 +3693,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3332084389428421978, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_Name
-      value: DyingInfoRespawn
+      value: DeathScreen
       objectReference: {fileID: 0}
     - target: {fileID: 3332084389428421978, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
       propertyPath: m_IsActive
@@ -3889,16 +3884,3 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3332084389428421978, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
   m_PrefabInstance: {fileID: 5534975430659547323}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5534975430659547326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5534975430659547325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 866669ebaeea85a4fa6927e427c07879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DyingInfo: {fileID: 1830345096}
