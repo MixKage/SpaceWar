@@ -201,9 +201,9 @@ MonoBehaviour:
   _missile: {fileID: 4078471944230309521, guid: 3661c5b2e562219488c2683ecbced807, type: 3}
   _shotPoint: {fileID: 6609553983999573662}
   _bodySpaceShip: {fileID: 6169746874417306041}
-  HitPoints: 100
   PlayerCamera: {fileID: 0}
   startTimeBtwShots: 0
+  DyingInfoRespawn: {fileID: 3332084389428421978, guid: 0e71e5fa91124bd4793a2d05598d979e, type: 3}
 --- !u!54 &1478379496522458212
 Rigidbody:
   m_ObjectHideFlags: 0

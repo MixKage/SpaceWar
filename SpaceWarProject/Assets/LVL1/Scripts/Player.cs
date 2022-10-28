@@ -28,6 +28,8 @@ public class Player : NetworkBehaviour
     private float timeBtwShots;
     [SerializeField] private float startTimeBtwShots;
 
+    [SerializeField] private GameObject DyingInfoRespawn;
+
     private void Start()
     {
         _rb = this.GetComponent<Rigidbody>();
@@ -82,6 +84,17 @@ public class Player : NetworkBehaviour
         return 1 - ((float)HitPoints / (float)MaxHitPoints);
     }
 
+    public void SetActivePlayer(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
+
+    public void ReturnPlayerInGame()
+    {
+        gameObject.SetActive(true);
+        HitPoints = MaxHitPoints;
+    }
+
     public void CameraUpdate()
     {
         PlayerCamera.transform.position = this.transform.position + new Vector3(0, cameraHeight, 0);
@@ -126,7 +139,11 @@ public class Player : NetworkBehaviour
         {
             HitPoints -= 20;
             if (HitPoints == 0)
-                NetworkServer.Destroy(gameObject);
+            {
+                //NetworkServer.Destroy(gameObject);
+                //Вместо удаления корабля мы будем его отключать
+                SetActivePlayer(false);
+            }
         }
     }
 
