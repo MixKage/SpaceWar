@@ -15,8 +15,10 @@ namespace SpaceWar.Pvp
 
         private void Start()
         {
-            if(isClient && isLocalPlayer)
+            if (isClient && isLocalPlayer)
+            {
                 mainCam = Camera.main;
+            }
         }
 
         public override void OnStartLocalPlayer()

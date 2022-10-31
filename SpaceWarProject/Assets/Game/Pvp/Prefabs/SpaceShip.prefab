@@ -152,6 +152,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478379496522458211}
+  - component: {fileID: -4315499063307932708}
+  - component: {fileID: -3101341132988405443}
   - component: {fileID: -7027900976961326564}
   - component: {fileID: -8845444952602603287}
   - component: {fileID: 5226534041830039966}
@@ -184,6 +186,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4315499063307932708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478379496522458208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872857e05fdfa45858d78e05b635f8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &-3101341132988405443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478379496522458208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187d20ce074ab45328f8ab4c23028e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _missile: {fileID: 4078471944230309521, guid: ed22ac1ee51e84b8eaafd29e0b34caf0, type: 3}
+  _shotPoint: {fileID: 6609553983999573662}
 --- !u!114 &-7027900976961326564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  _bodySpaceShip: {fileID: 2709261529053326183}
+  bodySpaceShip: {fileID: 2709261529053326183}
   moveSpeed: 100
 --- !u!114 &5226534041830039966
 MonoBehaviour:

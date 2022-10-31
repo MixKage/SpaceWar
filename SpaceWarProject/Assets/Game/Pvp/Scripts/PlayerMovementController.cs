@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using Mirror;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceWar.Pvp
 {
     public class PlayerMovementController : NetworkBehaviour
     {
         private Rigidbody _rb;
-        [Tooltip("Тело корабля для его разворота, чтобы UI элементы не вертелись вместе с ним")]
-        [SerializeField] private Transform _bodySpaceShip;
+        [FormerlySerializedAs("_bodySpaceShip")][Tooltip("Тело корабля для его разворота, чтобы UI элементы не вертелись вместе с ним")]
+        public Transform bodySpaceShip;
         [Header("Movement Settings")] public float moveSpeed = 100f;
         private void Start()
         {
@@ -41,8 +42,8 @@ namespace SpaceWar.Pvp
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                Vector3 lookRotation = new Vector3(hit.point.x, _bodySpaceShip.transform.position.y, hit.point.z);
-                _bodySpaceShip.transform.LookAt(lookRotation);
+                Vector3 lookRotation = new Vector3(hit.point.x, bodySpaceShip.transform.position.y, hit.point.z);
+                bodySpaceShip.transform.LookAt(lookRotation);
             }
         }
     }
