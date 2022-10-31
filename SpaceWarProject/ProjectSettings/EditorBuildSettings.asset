@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/LVL1/Scene/SampleScene.unity
+    path: Assets/Game/Menu/Offline/OfflineMenu.unity
+    guid: 4db55c4763e0e4835aee10f3c9b32732
+  - enabled: 1
+    path: Assets/Game/Menu/Online/RoomScene.unity
+    guid: 59b499043fa2b47cd92151d3edf57728
+  - enabled: 1
+    path: Assets/Game/Pvp/PvpScene.unity
+    guid: 2beab8ac1cbdd41638b60b69d7c744a1
+  - enabled: 0
+    path: Assets/Game/LVL1/Scene/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
