@@ -13,9 +13,10 @@ namespace SpaceWar.Pvp
         [HideInInspector] public Camera mainCam;
         private const float CameraHeight = 20f;
 
-        void Awake()
+        private void Start()
         {
-            mainCam = Camera.main;
+            if(isClient && isLocalPlayer)
+                mainCam = Camera.main;
         }
 
         public override void OnStartLocalPlayer()
