@@ -5,11 +5,11 @@ namespace SpaceWar.Menu.NetworkRoom
 {
     public class PlayerScore : NetworkBehaviour
     {
-        [SyncVar]
-        public int index;
+        [SyncVar] public int index;
 
-        [SyncVar]
-        public uint score;
+        [SyncVar] public string name;
+
+        [SyncVar] public uint score;
 
         void OnGUI()
         {
